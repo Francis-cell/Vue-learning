@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>组件嵌套1</title>
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<link href="" rel="stylesheet">
+	<script type="text/javascript" src="../../vue_js/dev/vue.js"></script>
+</head>
+<body>
+    
+	<div id="root"></div>
+
+    <script>
+    	Vue.config.productionTip = false
+
+    	// 第一步:定义Vue组件
+    	// student组件(子组件)，定义必须在它的父组件定义之前进行
+    	const student = Vue.extend({
+    		name: 'student',
+    		template: 
+    		`<div>
+    			<h3>学生信息： {{studentName}}</h3>
+    			<h3>学生年龄： {{age}}</h3>
+    		</div>`,
+    		data(){
+    			return {
+    				studentName: '张三',
+    				age: 18
+    			}
+    		}
+    	});
+
+    	// school组件(父组件)
+    	const school = Vue.extend({
+    		name: 'school',
+    		template:
+    		`<div>
+    			<h3>学校名称:{{schoolName}}</h3>
+    			<h3>学校地址:{{address}}</h3>
+    			<student></student>
+    		</div>`,
+    		data(){
+    			return {
+    				schoolName: '好的大学',
+    				address: '上海'
+    			}
+    		},
+    		components:{
+    			student
+    		}
+    	});
+
+
+    	// 定义一个新的组件hello
+    	const hello = Vue.extend({
+    		name: 'hello',
+    		template:
+    		`<div>
+    			<h3>你好的英语是：{{value}}</h3>
+    		</div>`,
+    		data(){
+    			return {
+    				value: 'hello'
+    			}
+    		}
+    	});
+    	
+    	// 定义一个管理所有组件的组件app
+    	const app = Vue.extend({
+    		name: 'app',
+    		template:
+    		`<div>
+    			<hello></hello>
+    			<school></school>
+    		</div>`,
+    		components: {
+    			hello,
+    			school
+    		}
+    	});
+
+    	new Vue({
+    		template: `<app></app>`,
+    		el:'#root',
+    		// 第二步：组件注册
+    		components:{
+    			// 将父组件注册到vm中
+    			app
+    		}
+    	});
+    </script>
+</body>
+</html>

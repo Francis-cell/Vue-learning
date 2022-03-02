@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>test04</title>
+	<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+	<div id="app1">
+		<ol>
+			<li v-for="site in sites">
+				{{ site.name }}
+			</li>
+		</ol>
+	</div>
+
+	<script type="text/javascript">
+		Vue.config.productionTip = false;  // 阻止Vue在浏览器中显示生产提示
+		new Vue({
+			el: '#app1',
+			data: {
+				sites:[
+					{ name: 'Runoodb' },
+					{ name: 'Google' },
+					{ name: 'Taobao' }
+				]
+			}
+		})
+	</script>
+</body>
+</html>

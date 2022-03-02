@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>v-model 双向绑定测试</title>
+	<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+	<style>
+		#chooseAll {
+			width: 50px;
+			height: 30px;
+			margin-top: 10px;
+			background-color: rgba(73, 186, 255, 0.7);
+			color: rgba(48, 56, 65, 0.9);
+			size: 10px;
+			border-radius: 5px;
+			border-color: rgba(199, 203, 209, 0.8);
+		}
+
+		#input1 {
+			height: 50px;
+			size: 30px;
+			background-color: rgba(199, 203, 209, 0.2);
+			border-radius: 5px;
+			border-color: rgba(199, 203, 209, 0.3);
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<p>单个复选框</p>
+		<input type="checkbox" id="checkbox" v-model="checked">
+		<label for="checkbox">{{checked}}</label>
+
+		<p>多个复选框</p>
+		<input type="checkbox" id="runoob" value="Runoob" v-model="myChecked" >
+		<label for="runoob">Runoob</label>
+		<input type="checkbox" id="Google" value="Google" v-model="myChecked">
+		<label for="Google">Google</label>
+		<input type="checkbox" id="Taobao" value="Taobao" v-model="myChecked">
+		<label for="Taobao">Taobao</label>
+		<br>
+		<input type="text" id="input1" placeholder="显示最终的结果" v-model="myChecked" readonly="input1">
+
+		<p>反选</p>
+		<input type="checkbox" id="runoob" value="Runoob" v-model="checkedNames" >
+		<label for="runoob">Runoob</label>
+		<input type="checkbox" id="Google" value="Google" v-model="checkedNames">
+		<label for="Google">Google</label>
+		<input type="checkbox" id="Taobao" value="Taobao" v-model="checkedNames">
+		<label for="Taobao">Taobao</label>
+		<br>
+		<input type="button" id="chooseAll" value="反选" @click="chooseAll">
+	</div>
+
+	<script>
+		var vm1 = new Vue({
+			el: '#app',
+			data: {
+				checked: true,
+				checkedNames: false,
+				myChecked: []
+			},
+			methods: {
+				chooseAll: function() {
+					if(this.checkedNames == false){
+						this.checkedNames = true
+					} else{
+						this.checkedNames = false
+					}
+				}
+			}
+		});
+	</script>
+</body>
+</html>

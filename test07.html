@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>监听listener test07</title>
+	<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+	<!-- 1、计数器listener测试 -->
+	<!-- <div id="app">
+		<p>计数器: {{counter}}</p>
+		<button @click = "counter++">点击</button>
+	</div> -->
+
+	<!-- 2、listener测试2 -->
+	<div id="app1">
+		千米： <input type="text" v-model = "kilometers">
+		米： <input type="text" v-model = "meters">
+		<!-- <button v-on:click="fun1">提交</button> -->
+	</div>
+	<p id="info"></p>
+
+	<script>
+		// 1、计数器listener测试
+		// var vm = new Vue({
+		// 	el: '#app',
+		// 	data: {
+		// 		counter: 1
+		// 	}
+		// });
+
+		// vm.$watch('counter', function(nval, oval) {
+		// 	alert('计数器值的变化： ' + oval + '变成' + nval + "!");
+		// });
+
+		// 2、listener测试2
+		var vm1 = new Vue({
+			el: '#app1',
+			data: {
+				kilometers: 0,
+				meters: 0
+			},
+			methods: {
+
+				// 思考：为什么不能在这里声明成一个方法，并在点击button按钮后将其触发
+				// fun1 : function() {
+				// 	// $watch 是一个实例方法
+				// 	vm1.$watch('kilometers', function (newValue, oldValue) {
+				// 		// 这个回调将在 vm1.kilometers 改变后调用
+				// 		document.getElementById('info').innerHTML = "kilometers的值在修改为： " + oldValue + " 修改后为： " + newValue;
+				// 	})
+				// }
+			},
+			computed: {
+			},
+			watch: {
+				kilometers : function(val) {
+					this.kilometers = val;
+					this.meters = this.kilometers * 1000;
+				},
+				meters : function(val) {
+					this.meters = val;
+					this.kilometers = val / 1000;
+				}
+			}
+		});
+
+		// $watch 是一个实例方法
+		vm1.$watch('kilometers', function (newValue, oldValue) {
+			// 这个回调将在 vm1.kilometers 改变后调用
+			document.getElementById('info').innerHTML = "kilometers的值在修改为： " + oldValue + " 修改后为： " + newValue;
+		})
+	</script>
+</body>
+</html>

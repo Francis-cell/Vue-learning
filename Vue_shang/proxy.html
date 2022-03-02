@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>数据代理</title>
+</head>
+<body>
+	<script>
+		let a = {value: 1};
+		let b = {value1 : 2};
+
+		Object.defineProperty(b, "value", {
+			get(){
+				return value;
+			},
+			set(value){
+				a.value = value
+			}
+		})
+	</script>
+</body>
+</html>

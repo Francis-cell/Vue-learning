@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>for循环测试test05</title>
+	<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+	<!-- 1、循环测试1 -->
+<!-- 	<div id="app">-->
+<!--		<ul>-->
+<!--			<li v-for="(value, key, index) in ject">-->
+<!--				{{index}}. {{key}} : {{value}}-->
+<!--				{{key}}&#45;&#45;{{index}}&#45;&#45;{{value}}-->
+<!--			</li>-->
+<!--		</ul>-->
+<!--	</div>-->
+
+	<!-- 2、循环测试2 -->
+<!--	<div id="app1">-->
+<!--		<ul>-->
+<!--			<li v-for="n in 10">-->
+<!--				{{n}}-->
+<!--			</li>-->
+<!--		</ul>-->
+<!--	</div>-->
+
+	<!-- 3、循环计算测试 -->
+<!--	<div id="app2">-->
+<!--		<input type="number" placeholder="number1" v-model="message1">-->
+<!--		<input type="number" placeholder="number2" v-model="message2">-->
+<!--		<p id="p1">{{add(message1, message2)}}</p>-->
+<!--	</div>-->
+
+	<!-- 4、动态添加表单测试 -->
+	<div id="app3">
+		<div v-for="(item, index) in headers">
+			div元素 + {{index}},
+			{{getSize}}
+<!--			item的值为: {{item}}, -->
+<!--			index的值为: {{index}}-->
+		</div>
+		<button onclick="addDiv()">添加</button>
+	</div>
+
+
+	<script type="text/javascript">
+		// 1、循环测试1
+		// var vw1 = new Vue({
+		// 	el: '#app',
+		// 	data: {
+		// 		ject: {
+		// 			name: '测试用例',
+		// 			url: 'localhost:8080',
+		// 			slogan: '本地测试使用'
+		// 		}
+		// 	}
+		// });
+
+
+		// 2、循环测试2
+		// var vw2 = new Vue({
+		// 	el: '#app1'
+		// });
+
+		// 3、循环计算测试3
+		// var vm3 = new Vue({
+		// 	el: '#app2',
+		// 	data:{
+		// 		message1: 0,
+		// 		message2: 0
+		// 	},
+		// 	methods: {
+		// 		add: function(value, value1) {
+		// 			value = parseInt(value) + parseInt(value1);
+		// 			return value;
+		// 		}
+		// 	}
+		// });
+
+		// 4、动态添加表单
+		var vm4 = new Vue({
+			el: '#app3',
+			data:{
+				headers: [
+					{
+						prop: "selection",
+						width: "55"
+					},
+					{
+						prop: "changes",
+						width: "66"
+					}
+				]
+			},
+			method:{
+				addDiv() {
+					// this.headers.size();
+				},
+				getSize() {
+					return this.headers.size();
+				}
+			}
+		});
+	</script>
+</body>
+</html>

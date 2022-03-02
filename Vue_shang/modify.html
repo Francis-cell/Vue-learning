@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>事件修饰符</title>
+	<!-- 引入开发环境的vue包 -->
+	<script type="text/javascript" src="../vue_js/dev/vue.js"></script>
+	<style>
+		*{
+			margin-top: 10px;
+		}
+		div{
+			background-color: skyblue;
+			weight: 50px;
+			height: 30px;
+		}
+		button{
+			max-width: 50px;
+
+			border-radius: 10px;
+			size: 10px;
+			background-color: rgba(50, 166, 204, 0.8);
+		}
+		#ul1{
+			width:  200px;
+			height: 200px;
+			background-color: orange;
+			overflow: auto;
+		}
+		li{
+			width: 100px;
+			height: 100px;
+		}
+	</style>
+</head>
+<body>
+	<!-- Vue中的事件修饰符：
+		1、prevent:阻止默认事件（常用），
+		2、stop:阻止事件冒泡（常用），
+		3、once:事件只触发一次（常用），
+		4、capture:使用事件捕获模式，
+		5、self:只有event.target是当前操作的元素时才触发事件
+		6、passive:事件的默认行为立即执行，无需等待事件回调执行完毕
+	 -->
+
+	 
+	 <div id="app">
+	 	<h2>欢迎欢迎，{{name}}{{name}}</h2>
+	 	<!-- 1、prevent:阻止默认事件 -->
+	 	<a href="http:www.baidu.com" @click.prevent="showInfo">百度一下</a>
+
+	 	<!-- 2、stop:阻止事件冒泡（常用） -->
+	 	<div class="demo1" @click="showInfo">
+	 		<button @click.stop="showInfo">click</button>
+	 	</div>
+
+	 	<!-- 3、once:事件只触发一次（常用） -->
+	 	<button @click.once="showInfo">click</button>
+
+	 	<!-- 4、capture:使用事件捕获模式 -->
+	 	<!-- 此处使用之后，外层的div在事件捕获阶段就可以触发函数了
+	 		原本只能在事件冒泡阶段才能触发对应的函数 -->
+	 	<div class="demo1" @click.capture="showMsg(1)">
+	 		<button @click="showMsg(2)">click</button>
+	 	</div>
+
+	 	<!-- 5、self:只有event.target是当前操作的元素时才触发事件 -->
+	 	<div class="demo1" @click.self="showMsg(1)">
+	 		<button @click="showMsg()">click</button>
+	 	</div>
+
+	 	<!-- 6、passive:事件的默认行为立即执行，无需等待事件回调执行完毕 -->
+	 	<ul id="ul1" @wheel.passive="clicks">
+	 		<li>1</li>
+	 		<li>2</li>
+	 		<li>3</li>
+	 		<li>4</li>
+	 		<li>5</li>
+	 	</ul>
+
+	 	<!-- ul#nav>li.item$*8>a{Item $} -->
+
+
+	 </div>
+
+	 <script>
+	 	new Vue({
+	 		el: '#app',
+	 		data:{
+	 			name: '好的'
+	 		},
+	 		methods: {
+	 			showInfo(){
+	 				alert("跳转百度页面!")
+	 			},
+	 			showMsg(number){
+	 				console.log(number)
+	 			},
+	 			clicks(){
+	 				for(let i = 0; i < 10000; i++){
+	 					console.log('#')
+	 				}
+	 				console.log('结束')
+	 			}
+	 		}
+	 	})
+	 </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>样式绑定 test08</title>
+	<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+	<style type="text/css">
+	/*绑定测试1*/
+	.base {
+		width: 100px;
+		height: 100px;
+	}
+
+	.active {
+		background:  green;
+	}
+	/*.active {
+		width: 100px;
+		height: 100px;
+		background: yellow;
+	}
+
+	/*绑定测试2*/
+	/*.base {
+		width: 100px;
+		height: 100px;
+	}
+
+	.active {
+		background:  green;
+	}
+
+	.text-danger {
+		background: red;
+	}*/
+	</style>
+</head>
+<body>
+
+	<!-- 绑定测试1 -->
+	<!-- 动态绑定样式 -->
+	<div id="app">
+		<div 
+		v-bind:class="[isActive ? 'active' : '',isBase ? 'base': '']"
+		style="text-align: center;line-height: 100px;color: grey;">what?</div>
+		<div :style="{color: color, fontSize: size, background: isGreen ? '#00a845': ''}">你好</div>
+	</div>
+
+	<!-- 绑定测试2 -->
+	<!-- <div id="app1">
+		<div v-bind:class="classObject"></div>
+	</div> -->
+	<script>
+		// 绑定测试1
+		new Vue({
+			el: '#app',
+			data: {
+				isActive: true,
+				isBase: true,
+				color: '#FF0000',
+				size: '50px',
+				isGreen: true
+			}
+		});
+
+
+		// 绑定测试2
+		// new Vue({
+		// 	el: '#app1',
+		// 	data: {
+		// 		isActive: true,
+		// 		error: {
+		// 			value: true,
+		// 			type: 'fatal'
+		// 		}
+		// 	},
+		// 	computed: {
+		// 		classObject: function() {
+		// 			return {
+		// 				base: true,
+		// 				active: this.isActive && !this.error.value,
+		// 				'text-danger' : this.error.value && this.error.type === 'fatal'
+		// 			}
+		// 		}
+		// 	}
+		// });
+	</script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>test03</title>
+	<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<style>
+	.class1 {
+		background-color: yellow;
+		color: green;
+	}
+
+	#app7 {
+		width: 100px;
+		height: 100px;
+		background-color: green;
+		color: red;
+	}
+
+	#inputs {
+		flex: 7;
+		padding: 5px;
+	}
+</style>
+<body>
+	<!-- 1、v-html -->
+	<div id="app1">
+		<div v-html="message"></div>
+	</div>
+
+	<!-- 2、v-bind -->
+	<!-- label中的for属性规定label与哪一个表单元素绑定 -->
+	<div id="app2">
+		<label for="r1">修改颜色</label> 
+		<input type="checkbox" v-model="use" id="r1">
+		<br/>
+		<div v-bind:class="{'class1':use}">
+			v-bind:class指令
+		</div>
+	</div>
+
+	<!-- 3、管道过滤器 -->
+	<div id="app3">
+		{{message | capitalize | lastCapitalize}}
+	</div>
+
+	<!-- 4、反转字符串 -->
+	<div id="app4">
+		<p>{{ message }}</p>
+		<button v-on:click="reverseMessage">反转字符串</button>
+	</div>
+
+	<!-- 5、字符循环后移 -->
+	<div id="app5">
+		<p>{{message}}</p>
+		<button @click="circulateMessage">字符串循环后移</button>
+	</div>
+
+	<!-- 6、反转字符串2-直接定义到div标签中 -->
+	<div id="app6">
+		{{message.split('').reverse().join('')}}
+	</div>
+
+	<!-- 7、v-model双向绑定测试 -->
+	<div id='app7'>
+		<p>{{reverseString(message)}}</p>
+		<input type="text" v-model="message" id='inputs'>
+	</div>
+
+	<script>
+
+		Vue.config.devtools = true;
+
+		// 1、v-html
+		var vm1 = new Vue({
+			el: '#app1',
+			data: {
+				message: "<h1>test03</h1>"
+			}
+		});
+
+		// 2、v-bind
+		var vm2 = new Vue({
+			el: '#app2',
+			data: {
+				use: false
+			}
+		});
+
+		// 3、过滤器
+		var vm3 = new Vue({
+			el: "#app3",
+			data: {
+				message: 'hello'
+			},
+			filters: {
+				capitalize: function (value){
+					if(!value) return '';
+					value = value.toString();
+					return value.charAt(0).toUpperCase() + value.slice(1);
+				},
+
+				lastCapitalize: function (value){
+					if(!value) return '';
+					value = value.toString();
+					return value.slice(0, value.length - 1)	 + value.charAt(value.length - 1).toUpperCase();
+				}
+			}
+		});
+
+		// 4、反转字符串
+		var vm4 = new Vue({
+			el: '#app4',
+			data: {
+				message: 'hello'
+			},
+			methods: {
+				reverseMessage: function() {
+					this.message = this.message.split('').reverse().join(' ');
+				}
+			}
+		});
+
+		// // 5、字符串循环后移
+		var vm5 = new Vue({
+			el: '#app5',
+			data: {
+				message: 'Hello'
+			},
+			methods: {
+				circulateMessage : function() {
+					if(!this.message) this.message = '';
+					var value = this.message.toString();
+					this.message = value.slice(1, value.length) + value.charAt(0);
+				}
+			}
+		});
+
+		// 6、字符串反转2
+		var vm6 = new Vue({
+			el: '#app6',
+			data: {
+				message: 'Hello'
+			}
+		});
+
+		// 7、字符串双向绑定
+		var vm7 = new Vue({
+			el: "#app7",
+			data: {
+				message: 'Hello'
+			},
+			methods: {
+				reverseString: function(message) {
+					if(!message) message = '';
+					message = message.split('').reverse().join('');
+					return message;
+				}
+			}
+		});
+	</script>
+</body>
+</html>
